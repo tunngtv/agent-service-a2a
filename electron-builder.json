@@ -1,0 +1,31 @@
+{
+  "appId": "com.example.agent-service-a2a",
+  "productName": "AI Assistant A2A",
+  "directories": {
+    "output": "dist",
+    "buildResources": "assets"
+  },
+  "files": [
+    "electron/**/*",
+    "frontend/apps/web/dist/**/*",
+    "package.json"
+  ],
+  "extraResources": [
+    {
+      "from": "frontend/apps/web/dist/",
+      "to": "app/dist/"
+    }
+  ],
+ "win": {
+    "target": "nsis",
+    "icon": "assets/icon.ico"
+  },
+  "mac": {
+    "target": "dmg",
+    "icon": "assets/icon.icns"
+  },
+  "linux": {
+    "target": "AppImage",
+    "icon": "assets/icon.png"
+  }
+}

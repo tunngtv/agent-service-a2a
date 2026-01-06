@@ -1,0 +1,21 @@
+{
+  "name": "agent-service-a2a",
+  "version": "1.0.0",
+  "description": "AI Agent as a Service with streaming responses",
+  "scripts": {
+    "dev": "concurrently \"cd backend && python -m uvicorn server.main:app --reload --host 0.0.0.0 --port 8000\" \"pnpm --filter=@agent-service/web dev\"",
+    "build": "pnpm --filter=@agent-service/web build",
+    "start": "electron .",
+    "electron:dev": "electron . --dev",
+    "electron:build": "electron-builder --dir",
+    "electron:dist": "electron-builder"
+  },
+  "keywords": ["ai", "chat", "assistant"],
+  "author": "Developer",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.6.3"
+  }
+}

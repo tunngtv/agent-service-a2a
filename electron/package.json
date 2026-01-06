@@ -1,0 +1,44 @@
+{
+  "name": "agent-service-electron",
+  "version": "1.0.0",
+  "description": "Electron wrapper for AI Agent Service",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder --dir"
+  },
+  "keywords": ["ai", "chat", "assistant", "electron"],
+  "author": "Developer",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "build": {
+    "appId": "com.example.agent-service",
+    "productName": "Agent Service",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/**/*",
+      "!src/**/*",
+      "!dist/**/*",
+      "!*.ts",
+      "!*.tsx",
+      "!tsconfig.json",
+      "!package-lock.json"
+    ],
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
