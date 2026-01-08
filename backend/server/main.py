@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Query
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, List, Any
@@ -32,8 +32,31 @@ async def health_check():
     """
     return {"status": "ok"}
 
+@app.get("/a2a/models")
+async def get_models():
+    """
+    Return list of available models
+    """
+    if agent_service.use_real_llm:
+        # In a real implementation, this would fetch from the LLM provider
+        return {"models": ["gpt-3.5-turbo", "gpt-4"]}
+    else:
+        # Return mock models when using mock responses
+        return {"models": ["mock-model"]}
+
+@app.delete("/a2a/conversations/{conversation_id}")
+async def reset_conversation(conversation_id: str):
+    """
+    Reset a specific conversation
+    """
+    agent_service.reset_conversation(conversation_id)
+    return {"message": f"Conversation {conversation_id} reset successfully"}
+
 @app.post("/a2a/messages")
-async def handle_messages(request: Request):
+async def handle_messages(
+    request: Request,
+    conversation_id: str = Query("default", description="Conversation ID to maintain context")
+):
     """
     Main endpoint for handling chat messages
     Request: {"messages": [{"role": "user", "content": "string"}]}
@@ -56,7 +79,7 @@ async def handle_messages(request: Request):
         async def event_generator():
             try:
                 # Process messages and stream the response
-                async for chunk in agent_service.aprocess_messages(messages):
+                async for chunk in agent_service.aprocess_messages(messages, conversation_id):
                     # Format as SSE: data: <content>\n\n
                     yield f"data: {chunk}\n\n"
                 # Send a completion message to signal end of stream

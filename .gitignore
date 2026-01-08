@@ -39,3 +39,49 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Backend specific
+agent_service_a2a/backend/*.pyc
+agent_service_a2a/backend/__pycache__/
+agent_service_a2a/backend/*.log
+agent_service_a2a/backend/venv/
+agent_service_a2a/backend/env/
+agent_service_a2a/backend/.env.local
+agent_service_a2a/backend/.env.development.local
+agent_service_a2a/backend/.env.test.local
+agent_service_a2a/backend/.env.production.local
+
+# Test and debug files
+agent_service_a2a/backend/debug_env.py
+agent_service_a2a/backend/check_current_config.py
+agent_service_a2a/backend/detailed_test.py
+agent_service_a2a/backend/test_gemini_integration.py
+
+# Local development
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
